@@ -172,6 +172,7 @@ Vorpal.prototype.parse = function (argv, options) {
           args[i] = '"' + args[i] + '"';
         }
       }
+      ui.attach(result);
       this.exec(args.join(' '), function (err) {
         if (err !== undefined && err !== null) {
           throw new Error(err);
@@ -655,6 +656,10 @@ vorpal._prompt = function (data) {
 
   if (ui.midPrompt()) {
     return self;
+  }
+
+  if (!ssn.fullDelimiter()) {
+    return undefined;
   }
 
   prompt = ui.prompt({
