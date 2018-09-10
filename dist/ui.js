@@ -257,7 +257,7 @@ var UI = function (_EventEmitter) {
       if (!this.parent) {
         return;
       }
-      str = String(str).trim() + ' ';
+      str = String(str).trim();
       this._lastDelimiter = str;
       inquirer.prompt.prompts.password.prototype.getQuestion = function () {
         self._activePrompt = this;
@@ -297,11 +297,10 @@ var UI = function (_EventEmitter) {
       var newWidth = prompt.rl.line.length;
       var diff = newWidth - width;
       prompt.rl.cursor += diff;
-      var cursor = 0;
       var message = prompt.getQuestion();
       var addition = prompt.status === 'answered' ? chalk.cyan(prompt.answer) : line;
       message += addition;
-      prompt.screen.render(message, { cursor: cursor });
+      prompt.screen.render(message);
 
       var key = (e.key || {}).name;
       var value = prompt ? String(line) : undefined;
@@ -522,11 +521,10 @@ var UI = function (_EventEmitter) {
       var newWidth = prompt.rl.line.length;
       var diff = newWidth - width;
       prompt.rl.cursor += diff;
-      var cursor = 0;
       var message = prompt.getQuestion();
       var addition = prompt.status === 'answered' ? chalk.cyan(prompt.answer) : prompt.rl.line;
       message += addition;
-      prompt.screen.render(message, { cursor: cursor });
+      prompt.screen.render(message);
       return this;
     }
 
