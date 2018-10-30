@@ -175,12 +175,24 @@ Vorpal.prototype.parse = function (argv, options) {
         }
       }
       ui.attach(result);
-      this.exec(args.join(' '), function (err) {
-        if (err !== undefined && err !== null) {
-          throw new Error(err);
-        }
-        process.exit(0);
-      });
+      // Waldek: pass stdin if specified. This is necessary to have
+      // a consistent experience between piping in the immersive and
+      // non-immersive mode
+      if (options.stdin) {
+        this.exec(args.join(' '), { stdin: options.stdin }, function (err) {
+          if (err !== undefined && err !== null) {
+            throw new Error(err);
+          }
+          process.exit(0);
+        });
+      } else {
+        this.exec(args.join(' '), function (err) {
+          if (err !== undefined && err !== null) {
+            throw new Error(err);
+          }
+          process.exit(0);
+        });
+      }
     }
   }
   return result;
