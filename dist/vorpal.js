@@ -864,7 +864,6 @@ vorpal._exec = function (item) {
   var matchArgs = commandData.matchArgs;
 
   function throwHelp(cmd, msg, alternativeMatch) {
-    cmd.session.log('throwhelp');
     if (msg) {
       cmd.session.log(msg);
     }
