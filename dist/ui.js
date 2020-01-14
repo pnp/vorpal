@@ -447,7 +447,8 @@ var UI = function (_EventEmitter) {
           console.log('Log got back \'false\' as data. This shouldn\'t happen.', data);
         }
       } else {
-        console.log.apply(console.log, args);
+        var b = Buffer.from(args[0], 'utf-8');
+        process.stdout.write(b);
       }
       return this;
     }
